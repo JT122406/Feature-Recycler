@@ -110,18 +110,18 @@ public class FeatureRecycler {
                         }
                         if (currentFeatureIDX >= 0 && nextFeatureIDX >= 0) {
                             if (currentFeatureIDX > nextFeatureIDX) {
-                                ResourceLocation currentBiomeLocation = biome.unwrapKey().orElseThrow().location();
-                                String currentBiomeName = currentBiomeLocation.toString();
-                                String currentFeatureName = currentHolder.unwrapKey().orElseThrow().location().toString();
-                                String nextFeatureName = nextHolder.unwrapKey().orElseThrow().location().toString();
-                                ResourceLocation ruleSetterLocation = biomeRuleSetter.unwrapKey().orElseThrow().location();
-                                String biomeRuleSetterName = ruleSetterLocation.toString();
+                                ResourceLocation currentBiomeLocation = biome.unwrapKey().isEmpty() ? null : biome.unwrapKey().orElseThrow().location();
+                                String currentBiomeName = currentBiomeLocation == null ? "???" : currentBiomeLocation.toString();
+                                String currentFeatureName = currentHolder.unwrapKey().isEmpty() ? "???" : currentHolder.unwrapKey().orElseThrow().location().toString();
+                                String nextFeatureName = nextHolder.unwrapKey().isEmpty() ? "???" : nextHolder.unwrapKey().orElseThrow().location().toString();
+                                ResourceLocation ruleSetterLocation = biomeRuleSetter.unwrapKey().isEmpty() ? null : biomeRuleSetter.unwrapKey().orElseThrow().location();
+                                String biomeRuleSetterName = ruleSetterLocation == null ? "???" :  ruleSetterLocation.toString();
 
                                 LOGGER.warn("Moved placed feature \"%s\" from index %d to index %d for biome \"%s\". Placed Feature index rules set by biome \"%s\".".formatted(currentFeatureName, currentHolderIndex, nextHolderIndex, currentBiomeName, biomeRuleSetterName));
                                 LOGGER.warn("Moved placed feature \"%s\" from index %d to index %d for biome \"%s\". Placed Feature index rules set by biome \"%s\".".formatted(nextFeatureName, nextHolderIndex, currentHolderIndex, currentBiomeName, biomeRuleSetterName));
 
 
-                                LOGGER.warn("Just prevented a crash between %s and %s! Please report the issues to their respective issue trackers.".formatted(currentBiomeLocation.getNamespace(), ruleSetterLocation.getNamespace()));
+                                LOGGER.warn("Just prevented a crash between %s and %s! Please report the issues to their respective issue trackers.".formatted(currentBiomeLocation == null ? "???" : currentBiomeLocation.getNamespace(), ruleSetterLocation == null ? "???" : ruleSetterLocation.getNamespace()));
                                 crashesPrevented++;
                                 currentList.set(currentHolderIndex, nextHolder);
                                 currentList.set(nextHolderIndex, currentHolder);
