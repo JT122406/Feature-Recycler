@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[52,)"
+loaderVersion = "[4,)"
 issueTrackerURL = "https://github.com/CorgiTaco/Feature-Recycler/issues"
 license = "All Rights Reserved"
 
@@ -15,15 +15,18 @@ Fixes the "Feature order cycle" error that occurs when various mods add placed f
 logoFile = "feature-recycler.png"
 
 [[dependencies.featurerecycler]]
-modId = "forge"
-mandatory = true
-versionRange = "[52,)"
+modId = "neoforge"
+type = "required"
+versionRange = "[21.1,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.featurerecycler]]
 modId = "minecraft"
-mandatory = true
-versionRange = "[1.21.1]"
+type = "required"
+versionRange = "[1.21.1,)"
 ordering = "NONE"
 side = "BOTH"
+
+[[mixins]]
+config = "featurerecycler-common.mixins.json"

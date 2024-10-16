@@ -7,7 +7,7 @@ pluginManagement.repositories {
 }
 
 plugins {
-    id("com.gradle.develocity") version("3.17.6")
+    id("com.gradle.develocity") version("3.18.1")
 }
 
 develocity.buildScan {
@@ -15,6 +15,6 @@ develocity.buildScan {
     termsOfUseAgree = "yes"
 }
 
-include("common", "fabric", "forge")
+include("common", "fabric", "forge", "neoforge")
 
 rootProject.name = "Feature Recycler"

@@ -1,11 +1,7 @@
 architectury {
-    common("forge", "fabric")
+    common("forge", "fabric", "neoforge")
     platformSetupLoomIde()
 }
-
-val minecraftVersion = project.properties["minecraft_version"] as String
-
-loom.accessWidenerPath.set(file("src/main/resources/featurerecycler.accesswidener"))
 
 sourceSets.main.get().resources.srcDir("src/main/generated/resources")
 

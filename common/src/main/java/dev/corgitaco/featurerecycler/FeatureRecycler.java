@@ -11,7 +11,6 @@ import net.minecraft.world.level.biome.FeatureSorter;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import org.slf4j.Logger;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +19,10 @@ import java.util.function.Function;
 
 public class FeatureRecycler {
 
-    /** The mod id for  examplemod. */
+    /** The mod id for Feature Recycler */
     public static final String MOD_ID = "featurerecycler";
 
-    /** The logger for examplemod. */
+    /** The logger for Feature Recycler */
     public static final Logger LOGGER = LogUtils.getLogger();
 
     /**
