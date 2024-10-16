@@ -4,7 +4,7 @@ plugins {
 
 architectury {
     platformSetupLoomIde()
-    fabric()
+    neoForge()
 }
 
 val minecraftVersion = project.properties["minecraft_version"] as String
@@ -18,7 +18,7 @@ configurations {
     create("shadowBundle")
     compileClasspath.get().extendsFrom(configurations["common"])
     runtimeClasspath.get().extendsFrom(configurations["common"])
-    getByName("developmentFabric").extendsFrom(configurations["common"])
+    getByName("developmentNeoForge").extendsFrom(configurations["common"])
     "shadowBundle" {
         isCanBeResolved = true
         isCanBeConsumed = false
@@ -26,18 +26,17 @@ configurations {
 }
 
 dependencies {
-    modImplementation("net.fabricmc:fabric-loader:${project.properties["fabric_loader_version"]}")
-    modApi("net.fabricmc.fabric-api:fabric-api:${project.properties["fabric_api_version"]}+$minecraftVersion")
+    neoForge("net.neoforged:neoforge:${project.properties["neoforge_version"]}")
 
     "common"(project(":common", "namedElements")) { isTransitive = false }
-    "shadowBundle"(project(":common", "transformProductionFabric"))
+    "shadowBundle"(project(":common", "transformProductionNeoForge"))
 }
 
 tasks {
     processResources {
         inputs.property("version", project.version)
 
-        filesMatching("fabric.mod.json") {
+        filesMatching("META-INF/neoforge.mods.toml") {
             expand(mapOf("version" to project.version))
         }
     }
@@ -48,7 +47,6 @@ tasks {
     }
 
     remapJar {
-        injectAccessWidener.set(true)
         inputFile.set(shadowJar.get().archiveFile)
         dependsOn(shadowJar)
     }

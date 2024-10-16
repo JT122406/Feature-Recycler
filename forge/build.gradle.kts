@@ -1,5 +1,5 @@
 plugins {
-    id("com.github.johnrengelman.shadow")
+    id("com.gradleup.shadow")
 }
 
 architectury {
@@ -26,29 +26,13 @@ configurations {
 }
 
 loom {
-    accessWidenerPath.set(project(":common").loom.accessWidenerPath)
-
     forge {
-        convertAccessWideners.set(true)
-        extraAccessWideners.add(loom.accessWidenerPath.get().asFile.name)
-
         mixinConfig("featurerecycler-common.mixins.json")
-        mixinConfig("featurerecycler.mixins.json")
-    }
-
-    // Forge Datagen Gradle config.  Remove if not using Forge datagen
-    runs.create("datagen") {
-        data()
-        programArgs("--all", "--mod", "featurerecycler")
-        programArgs("--output", project(":common").file("src/main/generated/resources").absolutePath)
-        programArgs("--existing", project(":common").file("src/main/resources").absolutePath)
     }
 }
 
 dependencies {
-    if ((project.properties["use_neoforge"] as String).toBoolean())
-        forge("net.neoforged:forge:$minecraftVersion-${project.properties["neoforge_version"]}")
-    else forge("net.minecraftforge:forge:$minecraftVersion-${project.properties["forge_version"]}")
+    forge("net.minecraftforge:forge:$minecraftVersion-${project.properties["forge_version"]}")
 
     "common"(project(":common", "namedElements")) { isTransitive = false }
     "shadowBundle"(project(":common", "transformProductionForge"))
@@ -64,7 +48,6 @@ tasks {
     }
 
     shadowJar {
-        exclude("architectury.common.json")
         configurations = listOf(project.configurations.getByName("shadowBundle"))
         archiveClassifier.set("dev-shadow")
     }
