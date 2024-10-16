@@ -19,10 +19,10 @@ import java.util.function.Function;
 
 public class FeatureRecycler {
 
-    /** The mod id for  examplemod. */
+    /** The mod id for Feature Recycler */
     public static final String MOD_ID = "featurerecycler";
 
-    /** The logger for examplemod. */
+    /** The logger for Feature Recycler */
     public static final Logger LOGGER = LogUtils.getLogger();
 
     /**

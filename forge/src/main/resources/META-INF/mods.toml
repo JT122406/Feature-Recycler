@@ -1,6 +1,6 @@
 modLoader = "javafml"
-loaderVersion = "[47,)"
-issueTrackerURL = ""
+loaderVersion = "[52,)"
+issueTrackerURL = "https://github.com/CorgiTaco/Feature-Recycler/issues"
 license = "All Rights Reserved"
 
 [[mods]]
@@ -8,21 +8,22 @@ modId = "featurerecycler"
 version = "${version}"
 displayName = "Feature Recycler"
 authors = "Corgi Taco"
+credits="Joseph T. McQuigg"
 description = '''
 Fixes the "Feature order cycle" error that occurs when various mods add placed features in different orders between their biomes. It does this by automatically recycling(resorting) their biome features to respect the rules set by a previous biome containing the same 2 elements.
 '''
-#logoFile = ""
+logoFile = "feature-recycler.png"
 
 [[dependencies.featurerecycler]]
 modId = "forge"
 mandatory = true
-versionRange = "[47.1,)"
+versionRange = "[52,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.featurerecycler]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.20.1]"
+versionRange = "[1.21.1]"
 ordering = "NONE"
 side = "BOTH"
