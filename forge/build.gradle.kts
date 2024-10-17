@@ -1,5 +1,10 @@
+import com.hypherionmc.modpublisher.properties.CurseEnvironment
+import com.hypherionmc.modpublisher.properties.ModLoader
+import com.hypherionmc.modpublisher.properties.ReleaseType
+
 plugins {
     id("com.gradleup.shadow")
+    id("com.hypherionmc.modutils.modpublisher") version "2.+"
 }
 
 architectury {
@@ -56,4 +61,29 @@ tasks {
         inputFile.set(shadowJar.get().archiveFile)
         dependsOn(shadowJar)
     }
+}
+
+publisher {
+    apiKeys {
+        curseforge(getPublishingCredentials().first)
+        modrinth(getPublishingCredentials().second)
+    }
+
+    curseID.set("1077985")
+    modrinthID.set("IAzu52kG")
+    setReleaseType(ReleaseType.RELEASE)
+    projectVersion.set(project.version.toString() + "-${project.name}")
+    displayName.set(base.archivesName.get() + "-${project.version}")
+    changelog.set(projectDir.toPath().parent.resolve("CHANGELOG.md").toFile().readText())
+    artifact.set(tasks.remapJar)
+    setGameVersions(minecraftVersion)
+    setLoaders(ModLoader.FORGE)
+    setCurseEnvironment(CurseEnvironment.SERVER)
+    setJavaVersions(JavaVersion.VERSION_21, JavaVersion.VERSION_22)
+}
+
+private fun getPublishingCredentials(): Pair<String?, String?> {
+    val curseForgeToken = (project.findProperty("curseforge_token") ?: System.getenv("CURSEFORGE_TOKEN") ?: "") as String?
+    val modrinthToken = (project.findProperty("modrinth_token") ?: System.getenv("MODRINTH_TOKEN") ?: "") as String?
+    return Pair(curseForgeToken, modrinthToken)
 }
